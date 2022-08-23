@@ -1,7 +1,19 @@
-const express =require("express");
-const router=express.Router();
+const router=require('express').Router()
 
-router.get('/',(req,res)=>res.render('welcome'))
+// Login/Landing Page
+//route GET/
+router.get('/',(req,res)=>{
+    res.render('login',{
+        layout:'login',
+    })
+})
+
+// Dashboard
+//route GET/
+router.get('/dashboard',(req,res)=>{
+    res.send('Dashboard')
+})
 
 
-module.exports=router
+module.exports=router;
+
