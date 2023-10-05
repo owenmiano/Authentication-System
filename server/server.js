@@ -1,6 +1,6 @@
 const express=require('express');
 const morgan =require('morgan')
-// const routes=require('./server/routes/recipeRoutes')
+const auth=require('./routes/auth')
 require('dotenv').config()
 const app=express();
 const port=process.env.PORT || 3310;
@@ -9,11 +9,11 @@ const connectDB=require('./db');
 
 // middleware
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:false}))
 
 
 // Api
-// app.use('/',routes)
+app.use('/auth',auth)
 
 if(process.env.NODE_ENV ==='development'){
     app.use(morgan('dev'))
