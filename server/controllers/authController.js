@@ -21,10 +21,12 @@ exports.registerUser=async(req,res)=>{
           const newUser= await Users.create({
             userName,
             email,
-            password:hashedPassword
+            password:hashedPassword,
+            isAdmin:true,
           })
           const token=await JWT.sign({
             id:Users._id,
+            isAdmin:Users.isAdmin,
         },
             process.env.JWT_SECRET_KEY,{
             expiresIn:"1hr"
@@ -59,6 +61,7 @@ exports.loginUser=async(req,res)=>{
    // if password is correct
    const token=await JWT.sign({
     id:user._id,
+    isAdmin:Users.isAdmin,
   },
     process.env.JWT_SECRET_KEY,{
     expiresIn:"1hr"
